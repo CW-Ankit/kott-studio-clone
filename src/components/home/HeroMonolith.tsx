@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { ImpossibleTriangle } from "../common/ImpossibleTriangle";
 
@@ -52,14 +52,14 @@ function mountPenroseScene(
     scene.background = paperColor.clone();
   }
 
-  // Materials: dark cubes with roughness/metalness, and single cobalt blue accent cube
+  // Materials: dark metallic cubes and signature cobalt blue accent cube
   const darkMaterial = new THREE.MeshStandardMaterial({
     color: 0x131316,
     roughness: 0.32,
     metalness: 0.6,
   });
   const blueMaterial = new THREE.MeshStandardMaterial({
-    color: 0x0037ff,
+    color: 0x0a5cff,
     roughness: 0.5,
     metalness: 0.1,
   });
@@ -226,7 +226,10 @@ function mountPenroseScene(
     az = lerp(az, endAngle.az, pZoom);
     el = lerp(el, endAngle.el, pZoom);
 
-    const mouseWeight = prefersReducedMotion ? 0 : (currentProgress < 0.02 ? 0 : currentProgress) * (1 - pZoom);
+    // Subtle pointer parallax response
+    const mouseWeight = prefersReducedMotion
+      ? 0
+      : (currentProgress < 0.02 ? 0.08 : currentProgress) * (1 - pZoom);
     az += 0.05 * mouseX * mouseWeight;
     el += 0.04 * mouseY * mouseWeight;
 
@@ -293,6 +296,7 @@ export function HeroMonolith() {
   const darkOverlayRef = useRef<HTMLDivElement>(null);
   const promptRef = useRef<HTMLSpanElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
+  const [webglActive, setWebglActive] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -325,7 +329,7 @@ export function HeroMonolith() {
         watermark.style.opacity = String(1 - smoothStep(0.52, 0.72, e));
         watermark.style.transform = `scale(${1 + 0.14 * e})`;
 
-        // Tagline fades out
+        // Tagline is visible at start (1) and fades out around 0.18 - 0.32
         tagline.style.opacity = String(1 - smoothStep(0.18, 0.32, e));
 
         // Dark background overlay fades in as you fly through
@@ -345,6 +349,7 @@ export function HeroMonolith() {
       },
     });
 
+    setWebglActive(true);
     return cleanup;
   }, []);
 
@@ -353,6 +358,7 @@ export function HeroMonolith() {
       ref={sectionRef}
       aria-label="Kott Studio — the impossible object"
       className="group relative h-[250vh] bg-paper text-ink data-[webgl=no]:h-auto"
+      data-webgl={webglActive ? "ok" : undefined}
     >
       <div
         ref={stickyRef}
@@ -372,8 +378,12 @@ export function HeroMonolith() {
           </span>
         </div>
 
-        {/* Fallback 2D SVG if WebGL is unavailable */}
-        <div className="absolute inset-0 z-[2] flex items-center justify-center group-data-[webgl=ok]:hidden pointer-events-none">
+        {/* Fallback 2D SVG if WebGL is unavailable or loading */}
+        <div
+          className={`absolute inset-0 z-[2] flex items-center justify-center pointer-events-none ${
+            webglActive ? "hidden" : "block"
+          }`}
+        >
           <ImpossibleTriangle className="h-[min(58vh,58vw)] w-auto translate-y-[-2vh]" />
         </div>
 
@@ -381,7 +391,7 @@ export function HeroMonolith() {
         <div
           ref={darkOverlayRef}
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-[15] bg-ink opacity-0 transition-opacity"
+          className="pointer-events-none absolute inset-0 z-[15] bg-ink opacity-0"
         />
 
         {/* Tagline */}
@@ -393,6 +403,7 @@ export function HeroMonolith() {
             ref={taglineRef}
             aria-hidden="true"
             className="font-display max-w-[22em] text-balance text-[clamp(18px,1.9vw,26px)] leading-[1.25] tracking-[-0.01em] text-ink"
+            style={{ opacity: 1 }}
           >
             <span className="block">there are probably things we simply cannot do.</span>
             <span className="unsure mt-1 block italic">we are not sure of that.</span>

@@ -5,42 +5,40 @@ import { ImpossibleTriangle } from "./ImpossibleTriangle";
 
 export function Preloader() {
   const [count, setCount] = useState(0);
-  const [visible, setVisible] = useState(true);
-  const [fading, setFading] = useState(false);
+  const [phase, setPhase] = useState<"play" | "done">("play");
+  const [mounted, setMounted] = useState(true);
 
   useEffect(() => {
-    // fast counter to 100
     const interval = setInterval(() => {
       setCount((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setFading(true);
-          setTimeout(() => setVisible(false), 700);
+          setPhase("done");
+          setTimeout(() => setMounted(false), 900);
           return 100;
         }
-        return prev + 4;
+        return prev + 5;
       });
-    }, 25);
+    }, 20);
 
     return () => clearInterval(interval);
   }, []);
 
-  if (!visible) return null;
+  if (!mounted) return null;
 
   return (
     <div
       aria-hidden="true"
       role="presentation"
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center gap-8 bg-paper text-ink transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        fading ? "-translate-y-full pointer-events-none" : "translate-y-0"
-      }`}
+      data-phase={phase}
+      className={`preloader ${phase === "done" ? "-translate-y-full pointer-events-none" : ""}`}
     >
-      <div className="w-[min(32vh,32vw)] animate-[preloader-mark_1.15s_cubic-bezier(0.16,1,0.3,1)_both]">
-        <ImpossibleTriangle className="w-full h-auto" />
+      <div className="preloader__mark">
+        <ImpossibleTriangle className="h-full w-auto" />
       </div>
-      <div className="flex items-baseline gap-4">
-        <span className="font-display text-2xl font-normal">kott®</span>
-        <span className="eyebrow tabular-nums text-muted text-sm">
+      <div className="preloader__meta">
+        <span className="preloader__word font-display">kott®</span>
+        <span className="preloader__count eyebrow tabular-nums">
           {String(Math.min(count, 100)).padStart(3, "0")}
         </span>
       </div>

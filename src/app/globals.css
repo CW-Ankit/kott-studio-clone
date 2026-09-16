@@ -13,6 +13,7 @@
   --color-line: rgba(16, 17, 19, 0.14);
   --color-line-paper: rgba(244, 245, 247, 0.16);
   --color-io-magenta: #ff3060;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --measure-tight: 28rem;
   --measure-prose: 38rem;
   --gutter: 2rem;
@@ -45,11 +46,27 @@ html {
   font-size: 0.7rem;
   font-weight: 600;
   margin-right: 0.35rem;
+  padding: 0.2em 0.5em 0.15em;
 }
 
 .font-display {
   font-family: var(--font-syne), "Syne", sans-serif;
   letter-spacing: -0.02em;
+}
+
+.unsure {
+  color: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .unsure {
+    animation: 3.4s ease-in-out infinite unsure-pulse;
+  }
+}
+
+@keyframes unsure-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
 
 .link-underline {
@@ -121,6 +138,43 @@ html {
 @keyframes glitch-slice-b {
   0% { clip-path: inset(60% 0 10%); transform: translate(-1px, 1px); }
   100% { clip-path: inset(20% 0 50%); transform: translate(1px, -1px); }
+}
+
+/* Preloader styles */
+.preloader {
+  z-index: 100;
+  background: var(--color-paper);
+  transition: transform 0.85s var(--ease-out-expo);
+  will-change: transform;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1.75rem, 4vh, 3rem);
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+.preloader__mark {
+  width: auto;
+  height: min(32vh, 32vw);
+  animation: preloader-mark 1.15s var(--ease-out-expo) both;
+}
+
+.preloader__meta {
+  color: var(--color-ink);
+  align-items: baseline;
+  gap: 1rem;
+  display: flex;
+}
+
+.preloader__word {
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
+  font-weight: 400;
+}
+
+.preloader__count {
+  color: var(--color-muted);
 }
 
 @keyframes preloader-mark {
