@@ -1,55 +1,144 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
-
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Georgia:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --font-roboto: "Roboto", sans-serif;
-  --font-georgia: "Georgia", serif;
+  --color-paper: #f4f5f7;
+  --color-paper-dim: #e8eaee;
+  --color-ink: #101113;
+  --color-ink-soft: #26282c;
+  --color-muted: #62656c;
+  --color-accent: #0037ff;
+  --color-accent-on-ink: #0037ff;
+  --color-line: rgba(16, 17, 19, 0.14);
+  --color-line-paper: rgba(244, 245, 247, 0.16);
+  --color-io-magenta: #ff3060;
+  --measure-tight: 28rem;
+  --measure-prose: 38rem;
+  --gutter: 2rem;
 }
 
 html {
+  background-color: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-instrument), var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
-body {
-  font-family: var(--font-roboto);
-  color: #1e1e1e;
-  background-color: #ffffff;
-  overflow-x: hidden;
+::selection {
+  background: var(--color-accent);
+  color: #ffffff;
 }
 
-.font-serif {
-  font-family: var(--font-georgia);
+.eyebrow {
+  font-family: var(--font-martian), ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
 }
 
-/* Button glow & sheen effect like Tilda's button effects */
-.btn-flash {
+.idx-tag {
+  display: inline-block;
+  font-family: var(--font-martian), monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-right: 0.35rem;
+}
+
+.font-display {
+  font-family: var(--font-syne), "Syne", sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.link-underline {
   position: relative;
-  overflow: hidden;
+  text-decoration: none;
 }
 
-.btn-flash::after {
-  content: "";
+.link-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.045;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Glitch hover animation */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch:hover::before,
+.glitch:hover::after {
+  content: attr(data-glitch);
   position: absolute;
   top: 0;
   left: 0;
-  width: 45px;
+  width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.5));
-  transform: skewX(-45deg);
-  animation: flash 3s linear infinite;
+  clip-path: inset(20% 0 30%);
 }
 
-@keyframes flash {
-  0% {
-    transform: translateX(-85px) skewX(-45deg);
-  }
-  25% {
-    transform: translateX(450px) skewX(-45deg);
-  }
-  100% {
-    transform: translateX(450px) skewX(-45deg);
-  }
+.glitch:hover::before {
+  left: -2px;
+  text-shadow: 1px 0 #0037ff;
+  animation: glitch-slice-a 0.25s infinite linear alternate-reverse;
+}
+
+.glitch:hover::after {
+  left: 2px;
+  text-shadow: -1px 0 #ff3060;
+  animation: glitch-slice-b 0.3s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-slice-a {
+  0% { clip-path: inset(10% 0 60%); transform: translate(1px, -1px); }
+  100% { clip-path: inset(50% 0 20%); transform: translate(-1px, 1px); }
+}
+
+@keyframes glitch-slice-b {
+  0% { clip-path: inset(60% 0 10%); transform: translate(-1px, 1px); }
+  100% { clip-path: inset(20% 0 50%); transform: translate(1px, -1px); }
+}
+
+@keyframes preloader-mark {
+  0% { opacity: 0; transform: translateY(2.5vh) scale(0.93); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--color-accent);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 1rem;
 }

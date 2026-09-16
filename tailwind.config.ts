@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-const config: Config = {
+export default {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,42 +9,36 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          purple: "#7c27a3",
-          purpleDark: "#682f87",
-          purpleDeep: "#782c8a",
-          red: "#d93232",
-          redDark: "#c70000",
-          green: "#57c25f",
-          greenDark: "#00ad09",
-          greenSoft: "#77ab62",
-          blue: "#4ca2db",
-          blueLight: "#d9e9f7",
-          cream: "#fcfbef",
-          bgLight: "#efefef",
-          bgSoft: "#f0f0f0",
-          dark: "#1e1e1e",
-          grayMuted: "#787878",
-          grayBorder: "#c9c9c9",
-        },
+        paper: "#f4f5f7",
+        "paper-dim": "#e8eaee",
+        ink: "#101113",
+        "ink-soft": "#26282c",
+        muted: "#62656c",
+        accent: "#0037ff",
+        "accent-on-ink": "#0037ff",
+        "io-magenta": "#ff3060",
+        line: "rgba(16, 17, 19, 0.14)",
+        "line-paper": "rgba(244, 245, 247, 0.16)",
       },
       fontFamily: {
-        sans: ["Roboto", "Helvetica Neue", "Arial", "sans-serif"],
-        serif: ["Georgia", "Times New Roman", "serif"],
-      },
-      keyframes: {
-        flash: {
-          "0%": { transform: "translateX(-100%)" },
-          "20%": { transform: "translateX(100%)" },
-          "100%": { transform: "translateX(100%)" },
-        },
+        display: ["var(--font-syne)", "Syne", "sans-serif"],
+        sans: ["var(--font-instrument)", "var(--font-grotesk)", "Instrument Sans", "Space Grotesk", "sans-serif"],
+        mono: ["var(--font-martian)", "Martian Mono", "ui-monospace", "monospace"],
       },
       animation: {
-        flash: "flash 3s linear infinite",
+        marquee: "marquee 25s linear infinite",
+        "typeset-swap": "typeset-swap 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
+      },
+      keyframes: {
+        marquee: {
+          to: { transform: "translate(-100%)" },
+        },
+        "typeset-swap": {
+          "0%": { opacity: "0", transform: "translateY(4px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
     },
   },
   plugins: [],
-};
-
-export default config;
+} satisfies Config;
