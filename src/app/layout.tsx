@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { Preloader } from "@/components/common/Preloader";
 import { GrainOverlay } from "@/components/common/GrainOverlay";
+import { CustomCursor } from "@/components/common/CustomCursor";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -92,6 +93,7 @@ export default function RootLayout({
           skip to content
         </a>
         <GrainOverlay />
+        <CustomCursor />
         <Preloader />
         <SiteHeader />
         <div className="flex-1">{children}</div>

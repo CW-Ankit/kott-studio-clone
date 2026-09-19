@@ -362,6 +362,7 @@ export function HeroMonolith() {
     >
       <div
         ref={stickyRef}
+        data-cursor="drag"
         className="sticky top-0 h-screen overflow-hidden bg-paper group-data-[webgl=no]:static"
       >
         {/* Background "IMPOSSIBLE" watermark */}

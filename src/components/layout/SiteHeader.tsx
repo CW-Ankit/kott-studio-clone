@@ -1,12 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { sound } from "@/lib/sound";
 
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(true);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setSoundEnabled(sound.isEnabled());
+    const handler = (e: Event) => {
+      const customEvent = e as CustomEvent<boolean>;
+      setSoundEnabled(customEvent.detail);
+    };
+    window.addEventListener("kott-sound-change", handler);
+    return () => window.removeEventListener("kott-sound-change", handler);
+  }, []);
 
   const navLinks = [
     { href: "/work", label: "/work", number: "01" },
@@ -24,7 +36,10 @@ export function SiteHeader() {
             href="/"
             className="font-display pointer-events-auto inline-block py-2 text-[26px] leading-none"
             aria-label="Kott Studio — home"
-            onClick={() => setMobileMenuOpen(false)}
+            onClick={() => {
+              sound.click();
+              setMobileMenuOpen(false);
+            }}
           >
             kott<sup className="text-[11px]">®</sup>
           </Link>
@@ -37,6 +52,7 @@ export function SiteHeader() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  onClick={() => sound.click()}
                   className={`eyebrow ml-2 px-3 py-3.5 transition-colors duration-200 ${
                     active ? "bg-paper text-ink" : "hover:bg-paper hover:text-ink text-paper"
                   }`}
@@ -49,10 +65,27 @@ export function SiteHeader() {
               href="https://kott.io"
               target="_blank"
               rel="noreferrer"
+              onClick={() => sound.click()}
               className="eyebrow ml-2 px-3 py-3.5 transition-colors duration-200 hover:bg-paper hover:text-ink text-paper"
             >
               kott.io ↗
             </a>
+
+            {/* Sound Toggle Button */}
+            <button
+              type="button"
+              onClick={() => sound.toggle()}
+              aria-label={soundEnabled ? "Mute interface audio" : "Enable interface audio"}
+              className="eyebrow ml-3 flex items-center gap-1.5 border border-paper/40 px-2.5 py-1.5 text-[11px] font-mono tracking-wider transition-colors duration-200 hover:bg-paper hover:text-ink text-paper"
+              title="Toggle interface sound"
+            >
+              <span
+                className={`inline-block h-1.5 w-1.5 rounded-full ${
+                  soundEnabled ? "bg-accent animate-pulse" : "bg-paper/40"
+                }`}
+              />
+              <span>[ sound: {soundEnabled ? "on" : "off"} ]</span>
+            </button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -60,7 +93,10 @@ export function SiteHeader() {
             type="button"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => {
+              sound.click();
+              setMobileMenuOpen(!mobileMenuOpen);
+            }}
             className="pointer-events-auto z-10 flex h-11 w-11 flex-col items-center justify-center gap-[5px] md:hidden"
           >
             <span
@@ -89,7 +125,10 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => {
+                sound.click();
+                setMobileMenuOpen(false);
+              }}
               className="font-display group flex items-baseline gap-5 border-b border-paper/25 py-5 text-5xl"
             >
               <span className="eyebrow text-paper/55">{item.number}</span>
@@ -97,11 +136,28 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
+
+        <div className="mt-8 flex flex-wrap items-center gap-4">
+          <button
+            type="button"
+            onClick={() => sound.toggle()}
+            className="eyebrow flex items-center gap-2 border border-paper/30 px-3 py-2 text-xs font-mono text-paper"
+          >
+            <span
+              className={`inline-block h-2 w-2 rounded-full ${
+                soundEnabled ? "bg-accent animate-pulse" : "bg-paper/40"
+              }`}
+            />
+            <span>[ sound: {soundEnabled ? "on" : "off"} ]</span>
+          </button>
+        </div>
+
         <a
           href="https://kott.io"
           target="_blank"
           rel="noreferrer"
-          className="eyebrow mt-10 inline-block bg-io-magenta px-5 py-3.5 text-ink font-semibold"
+          onClick={() => sound.click()}
+          className="eyebrow mt-6 inline-block bg-io-magenta px-5 py-3.5 text-ink font-semibold"
         >
           kott.io ↗
         </a>
