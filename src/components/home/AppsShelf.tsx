@@ -32,7 +32,7 @@ export function AppsShelf() {
           </div>
 
           <div className="relative">
-            <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3 [scrollbar-width:none] lg:grid lg:snap-none lg:grid-cols-7 lg:gap-4 lg:overflow-visible lg:pb-0 [&::-webkit-scrollbar]:hidden">
+            <div className="flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3 [scrollbar-width:none] lg:grid lg:snap-none lg:grid-cols-8 lg:gap-4 lg:overflow-visible lg:pb-0 [&::-webkit-scrollbar]:hidden">
               {SHIPPED_APPS.map((app) => (
                 <a
                   key={app.name}

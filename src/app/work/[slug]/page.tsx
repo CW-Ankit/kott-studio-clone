@@ -17,10 +17,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = WORK_PROJECTS.find((p) => p.slug === slug);
-  if (!project) return { title: "Project Not Found" };
+  if (!project) return { title: "Case — Kott Studio" };
 
   return {
-    title: `${project.title} — Kott Studio Case Study`,
+    title: `${project.title} — case — Kott Studio`,
     description: project.summary,
   };
 }
@@ -36,110 +36,163 @@ export default async function ProjectCaseStudyPage({ params }: PageProps) {
   const project = WORK_PROJECTS[currentIndex];
   const nextProject = WORK_PROJECTS[(currentIndex + 1) % WORK_PROJECTS.length];
 
+  // Images after the cover plate are treated as editorial spreads
+  const spreadImages = project.images.filter((img) => img !== project.cover);
+
   return (
-    <main id="content" className="pt-28 pb-32 px-6 md:px-14 bg-ink text-paper">
-      {/* Back to Work link */}
-      <div className="mb-8">
-        <Link href="/work" className="eyebrow link-underline text-paper/60 hover:text-paper">
-          ← back to all work
-        </Link>
-      </div>
-
-      {/* Case Study Header */}
-      <header className="border-b border-paper/15 pb-12">
-        <div className="flex items-baseline justify-between">
-          <span className="eyebrow text-accent-on-ink">{project.id} / 06</span>
-          <span className="eyebrow text-paper/60">{project.type} · {project.year}</span>
-        </div>
-
-        <h1 className="font-display mt-6 text-[clamp(44px,7.5vw,112px)] font-normal leading-[0.95] tracking-[-0.02em] md:font-thin">
-          {project.title}
-        </h1>
-
-        <p className="mt-8 max-w-[42em] text-[clamp(18px,2vw,24px)] leading-relaxed text-paper/80 font-light">
-          {project.summary}
+    <main id="content" className="bg-ink pt-28 pb-0 text-paper md:pt-36">
+      {/* Editorial Header */}
+      <header className="px-6 md:px-14">
+        <p className="eyebrow text-paper/55">
+          <Link className="link-underline text-paper/70 hover:text-paper" href="/work">
+            /work
+          </Link>{" "}
+          · case {project.id}
         </p>
 
-        {/* Project Meta Details Bar */}
-        <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-8 border-t border-paper/10">
-          <div>
-            <span className="eyebrow block text-paper/40">Client</span>
-            <span className="mt-1 block text-sm font-medium">{project.client}</span>
+        <h1 className="font-display mt-8 text-[clamp(52px,10vw,150px)] font-thin leading-[0.92]">
+          {project.title}
+          <span className="text-accent brightness-150 saturate-150">.</span>
+        </h1>
+
+        <p className="font-display mt-6 max-w-[24em] text-[clamp(20px,2vw,30px)] italic leading-[1.2] text-paper/70">
+          {project.headline || project.summary}
+        </p>
+
+        {/* Structured Definition List Matrix */}
+        <dl className="mt-12 grid gap-x-10 gap-y-6 border-t border-paper/20 pt-6 md:mt-16 md:grid-cols-12 md:gap-x-8">
+          <div className="md:col-span-3">
+            <dt className="eyebrow text-paper/55">discipline</dt>
+            <dd className="mt-2 text-[0.9rem] text-paper/80 font-light">{project.type}</dd>
           </div>
-          <div>
-            <span className="eyebrow block text-paper/40">Timeline</span>
-            <span className="mt-1 block text-sm font-medium">{project.year}</span>
+
+          <div className="md:col-span-2">
+            <dt className="eyebrow text-paper/55">year</dt>
+            <dd className="mt-2 text-[0.9rem] text-paper/80 font-light">{project.year}</dd>
           </div>
-          <div>
-            <span className="eyebrow block text-paper/40">Deliverables</span>
-            <span className="mt-1 block text-sm font-medium">{project.type}</span>
+
+          <div className="md:col-span-5">
+            <dt className="eyebrow text-paper/55">printed matter</dt>
+            <dd className="mt-2 text-[0.9rem] leading-relaxed text-paper/80 font-light">
+              {project.printedMatter || project.role}
+            </dd>
           </div>
-          <div>
-            <span className="eyebrow block text-paper/40">Live Site</span>
-            {project.liveUrl ? (
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="mt-1 inline-flex items-center gap-1 text-sm text-accent hover:underline font-medium"
-              >
-                visit live ↗
-              </a>
-            ) : (
-              <span className="mt-1 block text-sm text-paper/50">Private / On-prem</span>
-            )}
+
+          <div className="md:col-span-2 md:text-right">
+            <dt className="sr-only">full case</dt>
+            <dd>
+              {project.behanceUrl ? (
+                <a
+                  href={project.behanceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="eyebrow link-underline text-paper/70 hover:text-accent-on-ink"
+                >
+                  full case ↗
+                </a>
+              ) : project.liveUrl ? (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="eyebrow link-underline text-paper/70 hover:text-accent-on-ink"
+                >
+                  live site ↗
+                </a>
+              ) : null}
+            </dd>
           </div>
-        </div>
+        </dl>
       </header>
 
-      {/* Deep Dive Insights */}
-      {project.details && project.details.length > 0 && (
-        <section className="py-16 border-b border-paper/15">
-          <h2 className="eyebrow text-paper/50 mb-6">Key Engineering &amp; Design Notes</h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {project.details.map((detail, idx) => (
-              <div key={idx} className="p-6 border border-paper/10 rounded bg-paper/[0.02]">
-                <span className="eyebrow text-accent">0{idx + 1}</span>
-                <p className="mt-3 text-sm text-paper/75 leading-relaxed">{detail}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      {/* Hero Plate Showcase */}
+      <div className="mt-14 px-6 md:mt-20 md:px-14">
+        <div className="relative mx-auto md:w-[62%]">
+          <img
+            alt={`${project.title} — cover`}
+            width={1400}
+            height={1215}
+            src={project.cover}
+            className="h-auto w-full object-cover"
+          />
+        </div>
+      </div>
 
-      {/* Gallery of Project Images */}
-      <section className="py-16">
-        <h2 className="eyebrow text-paper/50 mb-8">Visual Showcase</h2>
-        <div className="space-y-12">
-          {project.images.map((imgSrc, idx) => (
-            <figure
-              key={idx}
-              className="overflow-hidden rounded-md border border-paper/15 bg-paper/[0.02]"
-            >
+      {/* The Situation (2-Column Editorial Split) */}
+      <div className="grid gap-8 px-6 py-20 md:grid-cols-12 md:gap-x-8 md:gap-y-10 md:px-14 md:py-28">
+        <p className="eyebrow text-paper/55 md:col-span-4">the situation</p>
+        <div className="md:col-span-8">
+          {project.situation && project.situation.length > 0 ? (
+            project.situation.map((para, idx) => (
+              <p
+                key={idx}
+                className={`max-w-[38em] text-[1.05rem] leading-relaxed text-paper/75 font-light ${
+                  idx > 0 ? "mt-6" : ""
+                }`}
+              >
+                {para}
+              </p>
+            ))
+          ) : (
+            <p className="max-w-[38em] text-[1.05rem] leading-relaxed text-paper/75 font-light">
+              {project.summary}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Editorial Image Spreads */}
+      {spreadImages.length > 0 && (
+        <div className="grid gap-6 px-6 pb-20 md:gap-10 md:px-14 md:pb-28 md:grid-cols-2">
+          {spreadImages.map((spread, idx) => (
+            <div key={idx} className="relative">
               <img
-                src={imgSrc}
-                alt={`${project.title} screenshot ${idx + 1}`}
-                className="w-full h-auto object-cover"
+                src={spread}
+                alt={`${project.title} — spread ${idx + 1}`}
+                loading="lazy"
+                width={1400}
+                height={1650}
+                className="h-auto w-full object-cover"
               />
-            </figure>
+            </div>
           ))}
         </div>
-      </section>
+      )}
 
-      {/* Next Project Footer */}
-      <footer className="mt-20 pt-16 border-t border-paper/20 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div>
-          <span className="eyebrow text-paper/40">Next Case Study</span>
-          <h3 className="font-display mt-2 text-3xl md:text-5xl font-normal hover:text-accent-on-ink transition-colors">
-            <Link href={`/work/${nextProject.slug}`}>{nextProject.title} →</Link>
-          </h3>
-        </div>
-
+      {/* Next Case Footer Banner */}
+      <footer className="border-t border-paper/20">
         <Link
-          href="/work"
-          className="eyebrow border border-paper/30 px-6 py-4 text-paper hover:bg-paper hover:text-ink transition-colors"
+          href={`/work/${nextProject.slug}`}
+          className="group grid items-center gap-y-10 px-6 py-16 md:grid-cols-12 md:gap-x-8 md:px-14 md:py-24"
         >
-          browse all projects
+          <div className="md:col-span-7">
+            <p className="eyebrow text-paper/55">next case</p>
+            <p className="font-display mt-4 text-[clamp(40px,7vw,110px)] font-thin leading-[0.95] text-paper">
+              {nextProject.title}
+              <span className="inline-block transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-3">
+                {" "}→
+              </span>
+            </p>
+          </div>
+
+          <div className="md:col-span-5">
+            <div className="group/plate relative">
+              <div className="relative overflow-hidden">
+                <img
+                  alt={`${nextProject.title} — cover`}
+                  loading="lazy"
+                  width={820}
+                  height={615}
+                  src={nextProject.cover}
+                  className="h-auto w-full transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] motion-safe:group-hover/plate:scale-[1.03]"
+                />
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 border border-accent opacity-0 transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/plate:opacity-100"
+                />
+              </div>
+            </div>
+          </div>
         </Link>
       </footer>
     </main>
