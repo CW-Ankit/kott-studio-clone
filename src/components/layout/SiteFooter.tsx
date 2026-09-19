@@ -124,32 +124,56 @@ export function SiteFooter() {
 
       {/* Awards & Recognition */}
       <div className="flex flex-col gap-3 border-t border-line-paper px-6 py-6 md:flex-row md:items-baseline md:gap-8 md:px-14">
-        <p className="eyebrow text-paper/55">Recognition</p>
-        <nav aria-label="Awards" className="flex flex-col gap-2 md:flex-row md:gap-8">
-          <a
-            href="https://www.awwwards.com/sites/hue-cry"
-            target="_blank"
-            rel="noreferrer"
-            className="eyebrow link-underline w-fit text-paper/70"
-          >
-            Awwwards Honorable Mention · Hue &amp; Cry
-          </a>
-          <a
-            href="https://www.cssdesignawards.com/sites/kott-studio/49904/"
-            target="_blank"
-            rel="noreferrer"
-            className="eyebrow link-underline w-fit text-paper/70"
-          >
-            CSSDA Special Kudos · Kott Studio
-          </a>
-          <a
-            href="https://www.cssdesignawards.com/sites/kott/50010/"
-            target="_blank"
-            rel="noreferrer"
-            className="eyebrow link-underline w-fit text-paper/70"
-          >
-            CSSDA Special Kudos · kott®
-          </a>
+        <p className="eyebrow text-paper/55 md:w-[7rem] md:shrink-0">Recognition</p>
+        <nav aria-label="Awards" className="flex flex-col gap-3 md:flex-row md:gap-10">
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <p className="eyebrow text-paper/55">Awwwards</p>
+            <a
+              href="https://www.awwwards.com/sites/hue-cry"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Awwwards — Hue &amp; Cry"
+              className="eyebrow link-underline text-paper/70"
+            >
+              Hue &amp; Cry
+            </a>
+          </div>
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <p className="eyebrow text-paper/55">CSS Design Awards</p>
+            <a
+              href="https://www.cssdesignawards.com/sites/hue-cry/49751/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="CSS Design Awards — Hue &amp; Cry"
+              className="eyebrow link-underline text-paper/70"
+            >
+              Hue &amp; Cry
+            </a>
+            <span aria-hidden="true" className="eyebrow text-paper/30">
+              ·
+            </span>
+            <a
+              href="https://www.cssdesignawards.com/sites/kott-studio/49904/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="CSS Design Awards — Kott Studio"
+              className="eyebrow link-underline text-paper/70"
+            >
+              Kott Studio
+            </a>
+            <span aria-hidden="true" className="eyebrow text-paper/30">
+              ·
+            </span>
+            <a
+              href="https://www.cssdesignawards.com/sites/kott/50010/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="CSS Design Awards — kott.io"
+              className="eyebrow link-underline text-paper/70"
+            >
+              kott.io
+            </a>
+          </div>
         </nav>
       </div>
 
