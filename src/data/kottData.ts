@@ -9,6 +9,10 @@ export interface Project {
   client: string;
   role: string;
   summary: string;
+  headline?: string;
+  printedMatter?: string;
+  behanceUrl?: string;
+  situation?: string[];
   details?: string[];
   images: string[];
   liveUrl?: string;
@@ -21,6 +25,8 @@ export interface AppProduct {
   screens: string[];
   link: string;
   desc: string;
+  platform?: string;
+  status?: string;
 }
 
 export interface ServiceItem {
@@ -29,6 +35,8 @@ export interface ServiceItem {
   subtitle: string;
   tags?: string[];
   colSpan?: string;
+  description?: string;
+  deliverables?: string[];
 }
 
 export interface LabItem {
@@ -47,6 +55,8 @@ export interface FaqItem {
 
 export interface JournalPost {
   slug: string;
+  number?: string;
+  category?: string;
   date: string;
   title: string;
   readingTime: string;
@@ -58,6 +68,10 @@ export const WORK_PROJECTS: Project[] = [
   {
     id: "01",
     slug: "hue-and-cry",
+    headline: "The agency for brands that refuse to whisper.",
+    printedMatter: "brand identity · website design · front-end build (React) · motion design",
+    behanceUrl: "https://www.behance.net/gallery/252194497/Hue-Cry-Visual-Identity-Website",
+    situation: ["Hue & Cry is a marketing agency that refuses to whisper, so the identity and the site had to carry real volume without tipping into noise. We built a strict black-and-white system with a single magenta accent used surgically: one loud word per headline, one colour that never dilutes.","Nothing is sourced. Every visual is computed, generated SVG pattern art in place of stock photography, a scroll-scrubbed manifesto, stacking capability cards, and motion tuned so the loudness reads as control. Identity and front-end build shipped as one piece."],
     title: "Hue & Cry",
     type: "identity / website",
     year: "2026",
@@ -82,6 +96,10 @@ export const WORK_PROJECTS: Project[] = [
   {
     id: "02",
     slug: "typeset",
+    headline: "The slowest part of starting a design, down to a few taps.",
+    printedMatter: "product design · front-end build (React) · curated type library · self-hosted font export",
+    behanceUrl: "https://www.behance.net/gallery/251990809/Typeset-A-Font-Pairing-Playground",
+    situation: ["Choosing two typefaces that work together is the slowest part of starting anything, and the “perfect” pairing is usually a licensed font you can’t actually ship. Typeset turns that ritual into a few taps: spin through curated heading-and-body combinations, tune them live, keep the ones that land.","We designed it and built it: React front end, self-hosted woff2, a CSS kit you export and drop straight into a project. Every face is free for commercial use, so anything you find here you can actually use. The studio doesn’t just draw the tools it wishes existed; it ships them."],
     title: "Typeset",
     type: "product / creative dev",
     year: "2026",
@@ -93,7 +111,7 @@ export const WORK_PROJECTS: Project[] = [
     details: [
       "High-speed variable font engine running client-side with zero external analytics.",
       "Live font pairing explorer allowing custom text input, kerning, and sizing.",
-      "Direct code exporter generating production CSS `@font-face` snippets."
+      "Direct code exporter generating production CSS @font-face snippets."
     ],
     images: [
       "/work/typeset-cover.gif",
@@ -105,6 +123,10 @@ export const WORK_PROJECTS: Project[] = [
   {
     id: "03",
     slug: "evia-platform",
+    headline: "A wellness platform that glows instead of shouts.",
+    printedMatter: "brand identity · landing page design · UI/UX · art direction",
+    behanceUrl: "https://www.behance.net/gallery/218503353/EVIA-Platform-Website-Identity",
+    situation: ["EVIA is a wellness-technology platform, and wellness online usually arrives loud: gradients, promises, urgency. We went the other way: a quiet transitional serif, warm skin-lit light, and a single held sphere carrying the whole visual argument.","Identity and landing page were designed as one piece, so the first scroll reads less like a pitch and more like a held breath. In a category that rarely earns it, restraint is what reads as trust."],
     title: "EVIA Platform",
     type: "identity / landing",
     year: "2025",
@@ -128,6 +150,10 @@ export const WORK_PROJECTS: Project[] = [
   {
     id: "04",
     slug: "aka-media",
+    headline: "Energy, clarity, confidence. For a house that makes things.",
+    printedMatter: "brand identity · modular system · website design · UI/UX",
+    behanceUrl: "https://www.behance.net/gallery/224858375/AKA-Media-Website-Design",
+    situation: ["AKA Media is a full-service creative production company, and the old brand didn’t move as fast as they did. We rebuilt the identity as a modular system of cards, colour and sharp messaging, something a fast-paced team can pick up and run without a designer in the room.","The website is no-code by design, so the people making the work can keep it alive. Modern, modular, unapologetically colourful, built for high-impact visuals and quick turnarounds."],
     title: "AKA Media",
     type: "identity / website",
     year: "2025",
@@ -151,6 +177,10 @@ export const WORK_PROJECTS: Project[] = [
   {
     id: "05",
     slug: "bean-there",
+    headline: "Therapy in a cup, with the packaging to match.",
+    printedMatter: "brand identity · packaging · verbal identity · social system",
+    behanceUrl: "https://www.behance.net/gallery/217794899/Bean-There-Brand-Identity",
+    situation: ["Bean There is a coffee brand with a personality problem, and it has a lot of it. The identity leans all the way in: fat rounded lettering, acid-bright colour, cups that talk back (“Sip Happens”, “Hot Bean”). A logo you’d actually put on a tote.","Voice, packaging and identity were designed as one loud thing, so the brand reads the same on a cup, a sticker or a phone. Effortlessly cool without trying too hard, which, naturally, took the most work."],
     title: "Bean There",
     type: "brand identity / packaging",
     year: "2025",
@@ -175,6 +205,10 @@ export const WORK_PROJECTS: Project[] = [
   {
     id: "06",
     slug: "phangan-yachts",
+    headline: "Bespoke sailing, booked in a few calm taps.",
+    printedMatter: "brand identity · website design · UI/UX · booking flow",
+    behanceUrl: "https://www.behance.net/gallery/190394977/Phangan-Yachts-Website-Identity",
+    situation: ["Phangan Yachts runs crewed charters, private tours and events off Koh Phangan, a bespoke experience that deserved a bespoke first impression. An editorial serif over aerial water, “every sail is a story”, and a booking flow that feels like planning a trip rather than filling in a form.","Identity and site were built together, so the calm carries from the wordmark through to the last confirmation screen. Luxury that whispers, on a coastline that doesn’t need the volume."],
     title: "Phangan Yachts",
     type: "identity / website",
     year: "2024",
@@ -193,17 +227,56 @@ export const WORK_PROJECTS: Project[] = [
       "/work/phangan-devices.jpg"
     ],
     liveUrl: "https://kott.studio/work/phangan-yachts"
+  },
+  {
+    id: "07",
+    slug: "hred-tech",
+    headline: "A venture fund for HR & EdTech, wired to the mains.",
+    printedMatter: "brand identity · website design · UI/UX · infographics",
+    behanceUrl: "https://www.behance.net/gallery/171512635/HrEd-Tech-Website-Identity",
+    situation: ["HR&ED-tech invests in HR and EdTech startups at the earliest stages, so the brand had to read as credible and quick at once. We built it around a kinetic wordmark and a single charged green, the energy of a bet placed early, on a near-black ground that keeps it serious.","The website leads with the offer, “we invest in IT projects at early stages in emerging markets”, and lets infographics carry the rest. Confident and fast, unmistakably a technology investor rather than a consultancy."],
+    title: "HR&ED-tech",
+    type: "identity / website",
+    year: "2023",
+    cover: "/work/hred.webp",
+    alt: "HR&ED-tech — cover",
+    client: "HR&ED-tech",
+    role: "Brand Identity, Website Design, UI/UX, Infographics",
+    summary: "Identity and website for a venture fund backing HR & EdTech startups. Electric green, kinetic wordmark.",
+    details: [
+      "HR&ED-tech invests in HR and EdTech startups at the earliest stages, so the brand had to read as credible and quick at once.",
+      "We built it around a kinetic wordmark and a single charged green, the energy of a bet placed early, on a near-black ground that keeps it serious.",
+      "The website leads with the offer: 'we invest in IT projects at early stages in emerging markets', and lets infographics carry the rest."
+    ],
+    images: [
+      "/work/hred.webp",
+      "/work/hred-2.webp",
+      "/work/hred-3.webp"
+    ],
+    liveUrl: "https://www.behance.net/gallery/171512635/HrEd-Tech-Website-Identity"
   }
 ];
 
 export const SHIPPED_APPS: AppProduct[] = [
+  {
+    name: "Optimized",
+    screen: "/work/apps/optimized-1.webp",
+    icon: "/work/apps/optimized-icon.png",
+    screens: ["/work/apps/optimized-1.webp", "/work/apps/optimized-2.webp", "/work/apps/optimized-3.webp"],
+    link: "mailto:hello@kott.studio?subject=Optimized%20Beta",
+    desc: "peptide protocols, tracked — doses, schedules and progress in one place.",
+    platform: "ios",
+    status: "soon in the App Store"
+  },
   {
     name: "Pomlo",
     screen: "/work/apps/pomlo-1.webp",
     icon: "/work/apps/pomlo-icon.png",
     screens: ["/work/apps/pomlo-1.webp", "/work/apps/pomlo-2.webp", "/work/apps/pomlo-3.webp"],
     link: "https://apps.apple.com/app/id6761341619",
-    desc: "A mindful productivity timer engineered for deep work sessions with ambient audio."
+    desc: "A mindful productivity timer engineered for deep work sessions with ambient audio.",
+    platform: "ios",
+    status: "App Store ↗"
   },
   {
     name: "NFCore",
@@ -211,7 +284,9 @@ export const SHIPPED_APPS: AppProduct[] = [
     icon: "/work/apps/nfcore-icon.png",
     screens: ["/work/apps/nfcore-1.webp", "/work/apps/nfcore-2.webp", "/work/apps/nfcore-3.webp"],
     link: "https://apps.apple.com/app/id6760419675",
-    desc: "Neurofeedback companion app tracking cognitive focus and daily recovery metrics."
+    desc: "Neurofeedback companion app tracking cognitive focus and daily recovery metrics.",
+    platform: "ios",
+    status: "App Store ↗"
   },
   {
     name: "QRDock",
@@ -219,7 +294,9 @@ export const SHIPPED_APPS: AppProduct[] = [
     icon: "/work/apps/qrdock-icon.png",
     screens: ["/work/apps/qrdock-1.webp", "/work/apps/qrdock-2.webp", "/work/apps/qrdock-3.webp"],
     link: "https://apps.apple.com/app/id6761479665",
-    desc: "Instant QR scanner and bookmark drawer for physical-to-digital work sessions."
+    desc: "Instant QR scanner and bookmark drawer for physical-to-digital work sessions.",
+    platform: "ios",
+    status: "App Store ↗"
   },
   {
     name: "Carets",
@@ -227,7 +304,9 @@ export const SHIPPED_APPS: AppProduct[] = [
     icon: "/work/apps/carets-icon.png",
     screens: ["/work/apps/carets-1.webp", "/work/apps/carets-2.webp", "/work/apps/carets-3.webp"],
     link: "https://apps.apple.com/app/id6775658561",
-    desc: "Minimalist text editor with custom typography, markdown support, and offline sync."
+    desc: "Minimalist text editor with custom typography, markdown support, and offline sync.",
+    platform: "ios",
+    status: "App Store ↗"
   },
   {
     name: "Margina",
@@ -235,7 +314,9 @@ export const SHIPPED_APPS: AppProduct[] = [
     icon: "/work/apps/margina-icon.png",
     screens: ["/work/apps/margina-1.webp", "/work/apps/margina-2.webp", "/work/apps/margina-3.webp"],
     link: "https://apps.apple.com/app/id6773490263",
-    desc: "Margin notes, quote archiving, and personal reading companion."
+    desc: "Margin notes, quote archiving, and personal reading companion.",
+    platform: "ios",
+    status: "App Store ↗"
   },
   {
     name: "Privara",
@@ -243,7 +324,9 @@ export const SHIPPED_APPS: AppProduct[] = [
     icon: "/work/apps/privara-icon.png",
     screens: ["/work/apps/privara-1.webp", "/work/apps/privara-2.webp", "/work/apps/privara-3.webp"],
     link: "https://apps.apple.com/app/id6760231829",
-    desc: "Private on-device vault for sensitive notes, credentials, and encrypted records."
+    desc: "Private on-device vault for sensitive notes, credentials, and encrypted records.",
+    platform: "ios",
+    status: "App Store ↗"
   },
   {
     name: "Foldless",
@@ -251,7 +334,9 @@ export const SHIPPED_APPS: AppProduct[] = [
     icon: "/work/apps/foldless-icon.png",
     screens: ["/work/apps/foldless-1.webp", "/work/apps/foldless-2.webp", "/work/apps/foldless-3.webp"],
     link: "https://apps.apple.com/app/id6775636169",
-    desc: "Crisp document scanner and paperless organizer with auto-edge detection."
+    desc: "full-page capture: any web page as one clean, full-length screenshot or PDF.",
+    platform: "ios",
+    status: "App Store ↗"
   }
 ];
 
@@ -260,49 +345,50 @@ export const SERVICES: ServiceItem[] = [
     id: "01",
     title: "Websites",
     subtitle: "designed, built, launched",
-    colSpan: "lg:col-span-4"
+    colSpan: "lg:col-span-4",
+    description: "Marketing sites, portfolios and platforms. Sub-second performance, subtle motion, responsive to any screen.",
+    deliverables: ["Creative Direction & Wireframes", "Full-Stack Web Development (Next.js/React)", "Interactive 3D / WebGL Integration", "CMS Setup & SEO Optimization"]
   },
   {
     id: "02",
     title: "Apps",
     subtitle: "same care, app-store sized",
-    colSpan: "lg:col-span-4"
+    colSpan: "lg:col-span-4",
+    description: "Native iOS and Android utilities engineered with SwiftUI and Kotlin. Focused, private, lightning fast.",
+    deliverables: ["Native iOS (Swift / SwiftUI)", "Cross-Platform (React Native / Flutter)", "Design System & Human Interface Guidelines", "App Store Submission & Lifecycle Management"]
   },
   {
     id: "03",
-    title: "Tools & platforms",
-    subtitle: "software with a job",
-    tags: ["SaaS & dashboards", "internal tools", "APIs & integrations", "production hardening"],
-    colSpan: "lg:col-span-8"
+    title: "Tools & Automations",
+    subtitle: "software that earns its keep",
+    colSpan: "lg:col-span-4",
+    description: "Custom internal tooling, bespoke admin dashboards, and AI agents automating complex repetitive workflows.",
+    deliverables: ["Custom Web Dashboards & Portals", "AI Agents & LLM Workflow Automation", "API Integrations (Stripe, Supabase, CRM)", "Real-Time Telemetry & Monitoring"]
   },
   {
     id: "04",
-    title: "Automations",
-    subtitle: "the busywork, made to do itself",
-    tags: ["AI agents & assistants", "workflow automation", "CRM / billing / auth glue", "internal bots"],
-    colSpan: "lg:col-span-8"
+    title: "Brand Identity",
+    subtitle: "type, color, language, system",
+    colSpan: "lg:col-span-6",
+    description: "A coherent visual vocabulary from wordmark and typography to digital design systems and printed matter.",
+    deliverables: ["Wordmark & Logo Systems", "Typeface Pairing & Color Matrix", "Digital Design Systems (Figma)", "Pitch Decks & Physical Collateral"]
   },
   {
     id: "05",
-    title: "Brands",
-    subtitle: "the part people remember",
-    colSpan: "lg:col-span-4"
-  },
-  {
-    id: "06",
-    title: "Rescue & support",
-    subtitle: "we do not disappear after launch",
-    tags: ["project recovery", "code & design review", "embedded support", "ongoing art direction"],
-    colSpan: "lg:col-span-12"
+    title: "Rescue & Support",
+    subtitle: "for the messy middle",
+    colSpan: "lg:col-span-6",
+    description: "Taking over stalled roadmaps, untangling design debt, tuning web vitals, and ongoing engineering retainers.",
+    deliverables: ["Performance & Core Web Vitals Audits", "Codebase Refactoring & Migration", "Dedicated Monthly Studio Retainers", "Feature Sprints & Emergency Fixes"]
   }
 ];
 
 export const LAB_SPECIMENS: LabItem[] = [
   {
     id: "001",
-    title: "Letterform",
-    desc: "drop in an image and watch it re-form out of characters. export it as text, png or svg.",
-    link: "https://www.kharnaa.com/playground/letterform",
+    title: "Impossible Triangle",
+    desc: "21 isometric polygons, zero runtime overhead. A mathematical paradox rendered in native canvas.",
+    link: "#monolith",
     previewType: "canvas"
   },
   {
@@ -328,79 +414,295 @@ export const LAB_SPECIMENS: LabItem[] = [
   }
 ];
 
+export const LAB_ITEMS: LabItem[] = LAB_SPECIMENS;
+
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    category: "Scope & Process",
-    question: "What does 'We draw it, then we build it' actually mean?",
-    answer: "It means there are no handoffs between disconnected design agencies and outsourced development teams. The very designers who create your typography, interaction feel, and visual identity are writing the React, Next.js, and Swift code that powers it. Ideas don't get diluted in translation."
+    "question": "What does Kott Studio do?",
+    "answer": "Kott Studio designs and builds websites, apps, tools, automations and brands. It is one small, senior team that takes a project from the first sketch through to a live domain or an app-store release. The drawing and the shipping are one engagement.",
+    "category": "01 — what we do"
   },
   {
-    category: "Scope & Process",
-    question: "Where are your clients based?",
-    answer: "We work directly with founders, studios, and technology companies across the United States, United Kingdom, and continental Europe. Communication happens asynchronously over Slack/Discord and targeted syncs."
+    "question": "Do you design only, or do you build it too?",
+    "answer": "Both, and by the same team. Every line on the menu covers the design and the code, so there is nothing to hand over in the middle: the people who drew the thing are the people who build it.",
+    "category": "01 — what we do"
   },
   {
-    category: "Tech Stack & Engineering",
-    question: "What technology stack do you use for websites and web apps?",
-    answer: "Our core web stack is Next.js (App Router), TypeScript, Tailwind CSS, Framer Motion, and Node/Bun on the server. For backend systems, APIs, and databases, we work with Postgres, Prisma, Supabase, Cloudflare Workers, and serverless edge functions."
+    "question": "Do you work with small businesses and early-stage startups?",
+    "answer": "Yes — that is most of the work. The smallest real engagements are an audit or discovery sprint, a single landing page, and monthly care for a site that is already live, so a first project does not have to be a large commitment.",
+    "category": "01 — what we do"
   },
   {
-    category: "Tech Stack & Engineering",
-    question: "What about native iOS and mobile development?",
-    answer: "All our iOS applications (like Pomlo, NFCore, and Carets) are built natively using Swift and SwiftUI, ensuring smooth 120Hz animations, native system widgets, and tiny install footprints."
+    "question": "Where is Kott Studio based, and who do you work with?",
+    "answer": "The studio has been running since 2020 and works with clients across the United States and Europe, remotely. The team is spread over Los Angeles, New York, Istanbul, Zurich, Kyiv and San Juan, so there is usually an overlapping working day either side of the Atlantic.",
+    "category": "01 — what we do"
   },
   {
-    category: "Pricing & Timelines",
-    question: "How do your engagements and budgets work?",
-    answer: "We take on both fixed-scope projects (typically between $3,000 to $35,000+ depending on complexity) and ongoing studio partner retainers. We provide upfront guarantees on delivery dates and scope."
+    "question": "What industries have you worked in?",
+    "answer": "Wellness technology, media and production, hospitality, healthcare, professional services, and HR and education technology. The shipped work includes brand systems, marketing sites, a font-pairing product, a yacht-charter booking site, and eight apps live in the App Store.",
+    "category": "01 — what we do"
   },
   {
-    category: "Pricing & Timelines",
-    question: "How quickly can a project launch?",
-    answer: "Focused brand identities or bespoke landing pages typically launch in 2 to 4 weeks. Full-scale SaaS platforms or mobile applications take between 6 to 10 weeks from first sketch to App Store approval."
+    "question": "How much does a website cost?",
+    "answer": "It depends on how much site there is. A single conversion page, a full marketing site and an award-tier motion build are three different jobs, and the number follows the scope rather than a list. The price is set after one call and put in writing before anything starts.",
+    "category": "02 — what it costs"
   },
   {
-    category: "Support & Handoff",
-    question: "Do you stay involved after the product launches?",
-    answer: "Yes. Our 'Rescue & Support' tier is specifically built for this. We provide ongoing engineering retainers, performance tuning, new feature sprints, and design review as your company scales."
+    "question": "How much does a brand identity cost?",
+    "answer": "By how far the system has to reach. A wordmark and a core kit is one job; strategy and positioning, packaging, and the deck and social systems that have to survive contact with real life is a larger one. One call is enough to tell which you need, and the price is fixed in writing after it.",
+    "category": "02 — what it costs"
+  },
+  {
+    "question": "How much does it cost to build an app?",
+    "answer": "By the size of the build, and by what has to be in the first release. Cross-platform work in React Native or Flutter is quoted the same way as native, and the quote covers getting it into the store rather than handing over a document. Apps are the largest thing on the menu.",
+    "category": "02 — what it costs"
+  },
+  {
+    "question": "What does a web app, dashboard or internal tool cost?",
+    "answer": "Tools are priced on surface area: how many screens, how much backend, and whether there is a design system to build or one to work inside. Automations sit at the cheaper end of the same work, because a workflow or an LLM feature inside a product you already have is a smaller thing than a platform.",
+    "category": "02 — what it costs"
+  },
+  {
+    "question": "What is the cheapest way to start working with you?",
+    "answer": "An audit or discovery sprint, or a single landing page. Both are real engagements with a written scope, and both are a reasonable way to find out how the studio works before committing to a larger build.",
+    "category": "02 — what it costs"
+  },
+  {
+    "question": "Is the price fixed?",
+    "answer": "Yes, once it is set. The quote comes after one call, goes in writing before any work begins, and does not move unless the scope does. There is no hourly meter running underneath it. The studio does not publish a price list, so there is no figure sitting on the site to be held to before anyone has described the job.",
+    "category": "02 — what it costs"
+  },
+  {
+    "question": "Do you offer ongoing monthly support?",
+    "answer": "Yes, in three tiers: keeping a site looked after, the same plus a page or a campaign each month, and care for a live app or platform. Embedded support is available by the week when a team needs someone inside it.",
+    "category": "02 — what it costs"
+  },
+  {
+    "question": "How does a project actually run?",
+    "answer": "Four steps: discover, plan, ship, handoff. The studio reads the code, the roadmap and the room before promising anything, writes a short backlog with honest dates, releases incrementally from week one, and leaves documentation and clean repositories behind.",
+    "category": "03 — how it runs"
+  },
+  {
+    "question": "How long does a project take?",
+    "answer": "Dates are set in the plan, after discovery, because the honest answer depends on scope. What is fixed is that releases start in week one and keep coming in reviewable slices, so you can see where a project stands the whole way through instead of waiting for one delivery at the end.",
+    "category": "03 — how it runs"
+  },
+  {
+    "question": "What do you need from me to get started?",
+    "answer": "A few honest lines about where you are headed, sent to hello@kott.studio or through the form at kott.studio/contact. The studio replies with what the project needs, usually within two days, and the call after that is where scope and the fixed price get settled.",
+    "category": "03 — how it runs"
+  },
+  {
+    "question": "Can you take over a project someone else started?",
+    "answer": "Yes — that is what the rescue and support line is for. It covers stalled roadmaps, code and design review, and picking work up in the messy middle, which is a different job from starting clean and is scoped as one.",
+    "category": "03 — how it runs"
+  },
+  {
+    "question": "What do you build with?",
+    "answer": "Websites and web apps in Next.js and React, mobile in Swift and Kotlin natively or React Native and Flutter cross-platform, and backends on Supabase and custom APIs. The stack is chosen per project rather than by habit, and everything ships to a real domain or a real store listing.",
+    "category": "04 — working together"
+  },
+  {
+    "question": "Who owns the work when the project is finished?",
+    "answer": "Ownership of the work product is set out in the written agreement or proposal for each engagement, alongside scope, deliverables, timelines and fees. It is settled in writing before the work starts, when it is still easy to settle.",
+    "category": "04 — working together"
+  },
+  {
+    "question": "What happens after launch?",
+    "answer": "The studio does not disappear at launch. Ongoing care runs from a site looked after month to month through to a live app or platform, and covers maintenance, art direction and the small, constant work that keeps a launched thing from drifting.",
+    "category": "04 — working together"
+  },
+  {
+    "question": "Do you build AI features and automations?",
+    "answer": "Yes — AI agents and assistants, LLM features inside an existing product, workflow automation, and the integrations between the CRM, billing and auth systems a company already pays for.",
+    "category": "04 — working together"
+  },
+  {
+    "question": "Is the studio big enough to handle a large build?",
+    "answer": "The team is small and senior with no agency layers, so the people briefed are the people working. Engineering capacity is extended through the studio&#x27;s delivery partner EchoPersona when a build needs more hands than the studio has, and you are told so at the start.",
+    "category": "04 — working together"
   }
 ];
 
 export const JOURNAL_POSTS: JournalPost[] = [
   {
-    slug: "impossible-geometry-in-svg",
-    date: "February 2026",
-    title: "Constructing the Impossible Triangle in Pure SVG",
-    readingTime: "4 min read",
-    excerpt: "How we mapped 21 isometric polygons to build Kott Studio's signature Penrose triangle mark.",
-    content: [
-      "The Penrose triangle is impossible in Euclidean 3-space, yet entirely coherent in 2D projection.",
-      "By calculating isometric vertices along 30-degree isometric axes, we built a 21-polygon mesh where each cube shares coordinates with its neighbor.",
-      "The result is a lightweight, zero-dependency SVG emblem that scales infinitely across any device resolution."
+    "slug": "ai-branding-tools-need-a-studio",
+    "number": "16",
+    "category": "Brand",
+    "date": "Sep 2026",
+    "title": "AI branding tools still need a studio behind them",
+    "readingTime": "4 min read",
+    "excerpt": "AI branding tools are fast and cheap, but they cannot tell you when the fast, cheap answer is the wrong one for your brand.",
+    "content": [
+      "AI branding tools are fast and cheap, but they cannot tell you when the fast, cheap answer is the wrong one for your brand.",
+      "In modern product development, the gap between strategic intent and tactical execution is where most value is lost. At Kott Studio, we examine this problem through the lens of engineering-led design.",
+      "When teams operate in silos—separating visual designers from frontend engineers—subtle interface nuances and performance details get dropped in translation. By uniting the drawing and the building under one roof, we preserve intentionality from day one.",
+      "Whether approaching brand identity systems or high-performance digital platforms, the goal is always clarity, durability, and frictionless user delight."
     ]
   },
   {
-    slug: "design-without-departments",
-    date: "January 2026",
-    title: "Design Without Departments: Why Code Is the Real Medium",
-    readingTime: "6 min read",
-    excerpt: "Why the separation between Figma and the browser is the single biggest source of design decay.",
-    content: [
-      "When a designer hands off a static artboard to an engineering team, what gets built is rarely what was envisioned.",
-      "Real software lives in the browser with viewport reflows, variable network latencies, and physical touch interaction.",
-      "By designing in code from day one, we eliminate handoff friction and deliver software that feels intentional."
+    "slug": "ai-website-builder-limits",
+    "number": "08",
+    "category": "Studio",
+    "date": "Sep 2026",
+    "title": "What an AI website builder cannot do, and when you still need a studio",
+    "readingTime": "5 min read",
+    "excerpt": "What an AI website builder cannot do, and when a growing company still needs the judgment and craft of a real studio.",
+    "content": [
+      "What an AI website builder cannot do, and when a growing company still needs the judgment and craft of a real studio.",
+      "In modern product development, the gap between strategic intent and tactical execution is where most value is lost. At Kott Studio, we examine this problem through the lens of engineering-led design.",
+      "When teams operate in silos—separating visual designers from frontend engineers—subtle interface nuances and performance details get dropped in translation. By uniting the drawing and the building under one roof, we preserve intentionality from day one.",
+      "Whether approaching brand identity systems or high-performance digital platforms, the goal is always clarity, durability, and frictionless user delight."
     ]
   },
   {
-    slug: "shipping-seven-ios-apps",
-    date: "November 2025",
-    title: "Shipping 7 Focused iOS Apps to the App Store in 12 Months",
-    readingTime: "5 min read",
-    excerpt: "What we learned from building lightweight, single-purpose utilities for Apple's ecosystem.",
-    content: [
-      "Modern mobile software is bloated with telemetry and unnecessary subscriptions.",
-      "We set out to build seven focused tools that perform exactly one job with extreme grace, zero cloud dependencies, and instant launch times.",
-      "From Pomlo's focus timers to Carets' typography-first text editor, focused software always wins on delight."
+    "slug": "how-to-brief-a-marketing-agency",
+    "number": "31",
+    "category": "Marketing",
+    "date": "Sep 2026",
+    "title": "How to brief a marketing agency so the work doesn't miss",
+    "readingTime": "6 min read",
+    "excerpt": "A clear, tactical guide on briefing creative partners without wasting weeks on revision loops and vague scope.",
+    "content": [
+      "A clear, tactical guide on briefing creative partners without wasting weeks on revision loops and vague scope.",
+      "In modern product development, the gap between strategic intent and tactical execution is where most value is lost. At Kott Studio, we examine this problem through the lens of engineering-led design.",
+      "When teams operate in silos—separating visual designers from frontend engineers—subtle interface nuances and performance details get dropped in translation. By uniting the drawing and the building under one roof, we preserve intentionality from day one.",
+      "Whether approaching brand identity systems or high-performance digital platforms, the goal is always clarity, durability, and frictionless user delight."
+    ]
+  },
+  {
+    "slug": "brand-style-guide-cost",
+    "number": "03",
+    "category": "Brand",
+    "date": "Sep 2026",
+    "title": "What a brand style guide costs, and what changes the price",
+    "readingTime": "4 min read",
+    "excerpt": "Breaking down the exact factors that drive identity costs: wordmarks, type pairings, production guidelines, and edge cases.",
+    "content": [
+      "Breaking down the exact factors that drive identity costs: wordmarks, type pairings, production guidelines, and edge cases.",
+      "In modern product development, the gap between strategic intent and tactical execution is where most value is lost. At Kott Studio, we examine this problem through the lens of engineering-led design.",
+      "When teams operate in silos—separating visual designers from frontend engineers—subtle interface nuances and performance details get dropped in translation. By uniting the drawing and the building under one roof, we preserve intentionality from day one.",
+      "Whether approaching brand identity systems or high-performance digital platforms, the goal is always clarity, durability, and frictionless user delight."
+    ]
+  },
+  {
+    "slug": "social-media-content-design-cost",
+    "number": "34",
+    "category": "Marketing",
+    "date": "Sep 2026",
+    "title": "What social content design costs, and what you're actually paying for",
+    "readingTime": "5 min read",
+    "excerpt": "What high-converting social creative actually costs, and why design systems beat one-off graphics every time.",
+    "content": [
+      "What high-converting social creative actually costs, and why design systems beat one-off graphics every time.",
+      "In modern product development, the gap between strategic intent and tactical execution is where most value is lost. At Kott Studio, we examine this problem through the lens of engineering-led design.",
+      "When teams operate in silos—separating visual designers from frontend engineers—subtle interface nuances and performance details get dropped in translation. By uniting the drawing and the building under one roof, we preserve intentionality from day one.",
+      "Whether approaching brand identity systems or high-performance digital platforms, the goal is always clarity, durability, and frictionless user delight."
+    ]
+  },
+  {
+    "slug": "how-much-to-spend-on-marketing",
+    "number": "07",
+    "category": "Marketing",
+    "date": "Sep 2026",
+    "title": "How much of your revenue should actually go to marketing",
+    "readingTime": "6 min read",
+    "excerpt": "A realistic perspective on marketing budget allocation across venture-backed startups and bootstrapped brands.",
+    "content": [
+      "A realistic perspective on marketing budget allocation across venture-backed startups and bootstrapped brands.",
+      "In modern product development, the gap between strategic intent and tactical execution is where most value is lost. At Kott Studio, we examine this problem through the lens of engineering-led design.",
+      "When teams operate in silos—separating visual designers from frontend engineers—subtle interface nuances and performance details get dropped in translation. By uniting the drawing and the building under one roof, we preserve intentionality from day one.",
+      "Whether approaching brand identity systems or high-performance digital platforms, the goal is always clarity, durability, and frictionless user delight."
+    ]
+  },
+  {
+    "slug": "pitch-deck-design-cost",
+    "number": "37",
+    "category": "Brand",
+    "date": "Sep 2026",
+    "title": "How much a pitch deck actually costs, and what you get for it",
+    "readingTime": "4 min read",
+    "excerpt": "The economics of venture pitch decks: why investors read structure before typography, and what a studio deck costs.",
+    "content": [
+      "The economics of venture pitch decks: why investors read structure before typography, and what a studio deck costs.",
+      "In modern product development, the gap between strategic intent and tactical execution is where most value is lost. At Kott Studio, we examine this problem through the lens of engineering-led design.",
+      "When teams operate in silos—separating visual designers from frontend engineers—subtle interface nuances and performance details get dropped in translation. By uniting the drawing and the building under one roof, we preserve intentionality from day one.",
+      "Whether approaching brand identity systems or high-performance digital platforms, the goal is always clarity, durability, and frictionless user delight."
+    ]
+  },
+  {
+    "slug": "how-many-ad-creatives-to-test",
+    "number": "40",
+    "category": "Marketing",
+    "date": "Sep 2026",
+    "title": "How many ad creatives do you actually need before the numbers mean anything",
+    "readingTime": "5 min read",
+    "excerpt": "Why statistical significance requires structured creative iterations rather than throwing random designs at the wall.",
+    "content": [
+      "Why statistical significance requires structured creative iterations rather than throwing random designs at the wall.",
+      "In modern product development, the gap between strategic intent and tactical execution is where most value is lost. At Kott Studio, we examine this problem through the lens of engineering-led design.",
+      "When teams operate in silos—separating visual designers from frontend engineers—subtle interface nuances and performance details get dropped in translation. By uniting the drawing and the building under one roof, we preserve intentionality from day one.",
+      "Whether approaching brand identity systems or high-performance digital platforms, the goal is always clarity, durability, and frictionless user delight."
+    ]
+  },
+  {
+    "slug": "cost-of-ad-creative",
+    "number": "14",
+    "category": "Marketing",
+    "date": "Sep 2026",
+    "title": "What ad creative really costs, per asset and per month",
+    "readingTime": "5 min read",
+    "excerpt": "A transparent breakdown of performance creative expenses per static plate, motion asset, and monthly retainer.",
+    "content": [
+      "A transparent breakdown of performance creative expenses per static plate, motion asset, and monthly retainer.",
+      "In modern product development, the gap between strategic intent and tactical execution is where most value is lost. At Kott Studio, we examine this problem through the lens of engineering-led design.",
+      "When teams operate in silos—separating visual designers from frontend engineers—subtle interface nuances and performance details get dropped in translation. By uniting the drawing and the building under one roof, we preserve intentionality from day one.",
+      "Whether approaching brand identity systems or high-performance digital platforms, the goal is always clarity, durability, and frictionless user delight."
+    ]
+  },
+  {
+    "slug": "why-software-projects-go-over-budget",
+    "number": "35",
+    "category": "Websites",
+    "date": "Sep 2026",
+    "title": "Why do software projects go over budget?",
+    "readingTime": "6 min read",
+    "excerpt": "The architectural and process flaws that quietly inflate development costs, and how fixed-scope milestones prevent them.",
+    "content": [
+      "The architectural and process flaws that quietly inflate development costs, and how fixed-scope milestones prevent them.",
+      "In modern product development, the gap between strategic intent and tactical execution is where most value is lost. At Kott Studio, we examine this problem through the lens of engineering-led design.",
+      "When teams operate in silos—separating visual designers from frontend engineers—subtle interface nuances and performance details get dropped in translation. By uniting the drawing and the building under one roof, we preserve intentionality from day one.",
+      "Whether approaching brand identity systems or high-performance digital platforms, the goal is always clarity, durability, and frictionless user delight."
+    ]
+  },
+  {
+    "slug": "fixed-price-vs-time-and-materials",
+    "number": "02",
+    "category": "Product",
+    "date": "Sep 2026",
+    "title": "Fixed price or time and materials, how to structure a build so it doesn't blow up",
+    "readingTime": "7 min read",
+    "excerpt": "Comparing contract models in modern software delivery: when fixed pricing protects you, and when time-and-materials makes sense.",
+    "content": [
+      "Comparing contract models in modern software delivery: when fixed pricing protects you, and when time-and-materials makes sense.",
+      "In modern product development, the gap between strategic intent and tactical execution is where most value is lost. At Kott Studio, we examine this problem through the lens of engineering-led design.",
+      "When teams operate in silos—separating visual designers from frontend engineers—subtle interface nuances and performance details get dropped in translation. By uniting the drawing and the building under one roof, we preserve intentionality from day one.",
+      "Whether approaching brand identity systems or high-performance digital platforms, the goal is always clarity, durability, and frictionless user delight."
+    ]
+  },
+  {
+    "slug": "no-code-to-custom-development",
+    "number": "01",
+    "category": "Product",
+    "date": "Aug 2026",
+    "title": "When should you switch from no-code to custom development?",
+    "readingTime": "5 min read",
+    "excerpt": "The inflection points where Webflow, Bubble, and low-code tools stop scaling, and when custom Next.js engineering is required.",
+    "content": [
+      "The inflection points where Webflow, Bubble, and low-code tools stop scaling, and when custom Next.js engineering is required.",
+      "In modern product development, the gap between strategic intent and tactical execution is where most value is lost. At Kott Studio, we examine this problem through the lens of engineering-led design.",
+      "When teams operate in silos—separating visual designers from frontend engineers—subtle interface nuances and performance details get dropped in translation. By uniting the drawing and the building under one roof, we preserve intentionality from day one.",
+      "Whether approaching brand identity systems or high-performance digital platforms, the goal is always clarity, durability, and frictionless user delight."
     ]
   }
 ];
